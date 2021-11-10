@@ -1,0 +1,8 @@
+---
+hostname_value: "{{ inventory_hostname }}"
+hostname_hosts_file: "/etc/hosts"
+hostname_restart_services: []
+#  - rsyslog
+
+#hostname_extra_static: |
+#  10.10.10.10 test

@@ -1,0 +1,38 @@
+---
+- name: Install requirements
+  package:
+    name: dbus
+    state: present
+
+- name: Ensure dbus.socket is running
+  service:
+    name: dbus.socket
+    state: started
+
+- name: Set hostname
+  hostname:
+    name: "{{ hostname_value }}"
+    use: systemd
+  register: name
+
+- name: Update hosts file
+  template:
+    src: hosts.j2
+    dest: "{{ hostname_hosts_file }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: 'yes'
+
+- name: Populate service facts
+  service_facts:
+
+- name: restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items: "{{ hostname_restart_services }}"
+  when:
+    - item in services
+    - name.changed
+    - hostname_restart_services|lengh >0
