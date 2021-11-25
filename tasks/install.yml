@@ -35,4 +35,4 @@
   when:
     - item in services
     - name.changed
-    - hostname_restart_services|lengh >0
+    - hostname_restart_services|length >0

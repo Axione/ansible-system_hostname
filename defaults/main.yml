@@ -1,5 +1,6 @@
 ---
 hostname_value: "{{ inventory_hostname }}"
+hostname_domain: "example.net"
 hostname_hosts_file: "/etc/hosts"
 hostname_restart_services: []
 #  - rsyslog
