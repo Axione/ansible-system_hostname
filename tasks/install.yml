@@ -1,22 +1,22 @@
 ---
 - name: Install requirements
-  package:
+  ansible.builtin.package:
     name: dbus
     state: present
 
 - name: Ensure dbus.socket is running
-  service:
+  ansible.builtin.service:
     name: dbus.socket
     state: started
 
 - name: Set hostname
-  hostname:
+  ansible.builtin.hostname:
     name: "{{ hostname_value }}"
     use: systemd
   register: name
 
 - name: Update hosts file
-  template:
+  ansible.builtin.template:
     src: hosts.j2
     dest: "{{ hostname_hosts_file }}"
     owner: root
@@ -25,10 +25,10 @@
     backup: 'yes'
 
 - name: Populate service facts
-  service_facts:
+  ansible.builtin.service_facts:
 
 - name: restart services
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: restarted
   with_items: "{{ hostname_restart_services }}"
