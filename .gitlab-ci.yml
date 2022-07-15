@@ -66,6 +66,7 @@ push_src_on_github:
     - COMMENT=$(git log -1 --pretty=%B | head -1)
   script:
     - git clone git@github.com:${GITHUB_USER}/ansible-system_hostname.git /tmp/ansible-system_hostname
+    - find /tmp/ansible-system_hostname -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf "{}" +;
     - rm -rf .git
     - cp -r . /tmp/ansible-system_hostname/
     - cd /tmp/ansible-system_hostname
