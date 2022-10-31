@@ -1,9 +1,14 @@
 ---
+#use to set name on system
 hostname_value: "{{ inventory_hostname }}"
-hostname_domain: "example.net"
-hostname_hosts_file: "/etc/hosts"
-hostname_restart_services: []
-#  - rsyslog
 
+hostname_hosts_file: "/etc/hosts"
+#content on file
+hostname_base_content: |
+  127.0.0.1     {{ inventory_hostname }}   {{ ansible_fqdn }}   localhost
 #hostname_extra_static: |
 #  10.10.10.10 test
+
+#restart some service to apply new name
+hostname_restart_services: []
+#  - rsyslog

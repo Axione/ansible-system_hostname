@@ -1,6 +1,8 @@
 {{ ansible_managed | comment }}
 
-127.0.0.1     {{ inventory_hostname}}   {{ inventory_hostname.split(hostname_domain)[0] }}   localhost  
+{% if hostname_base_content is defined %}
+{{ hostname_base_content }}
+{% endif %}
 
 {% if hostname_extra_static is defined %}
 {{ hostname_extra_static }}
