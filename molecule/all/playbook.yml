@@ -1,0 +1,11 @@
+---
+- name: Run role
+  hosts: all
+  become: true
+  any_errors_fatal: true
+
+  roles:
+    - role: ansible-system_hostname
+
+  vars:
+    hostname_hosts_file: /etc/hosts2
