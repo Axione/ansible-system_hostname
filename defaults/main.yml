@@ -4,9 +4,10 @@ hostname_value: "{{ inventory_hostname }}"
 
 #/etc/hosts content
 hostname_hosts_file: "/etc/hosts"
-hostname_base_content: |
-  127.0.0.1     {{ inventory_hostname }}   {{ ansible_fqdn }}   localhost
-hostname_extra_static: ""
+hostname_base_content: |-
+  127.0.0.1      localhost
+  {{ ansible_default_ipv4.address }}      {{ ansible_fqdn }}   {{ inventory_hostname }}
+hostname_extra_content: ""
 #  10.10.10.10 test
 hostname_ipv6_default_content: true
 

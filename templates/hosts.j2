@@ -3,9 +3,9 @@
 {% if hostname_base_content is defined and hostname_base_content | length > 0 %}
 {{ hostname_base_content }}
 {% endif %}
-{% if hostname_extra_static is defined and hostname_extra_static | length > 0 %}
+{% if hostname_extra_content is defined and hostname_extra_static | length > 0 %}
 
-{{ hostname_extra_static }}
+{{ hostname_extra_content }}
 {% endif %}
 {% if hostname_ipv6_default_content is defined and hostname_ipv6_default_content is sameas true %}
 
