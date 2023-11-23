@@ -3,6 +3,10 @@
   ansible.builtin.package:
     name: dbus
     state: present
+  register: pkg_result
+  retries: 12
+  delay: 10
+  until: pkg_result is success
 
 - name: Ensure dbus.socket is running
   ansible.builtin.service:
