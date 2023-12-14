@@ -1,37 +1,37 @@
 ---
 stages:
-  - lint
-  - test
   - changes
   - push
 
 variables:
   GITHUB_USER: lotusnoir
+  ANSIBLE_REMOTE_TMP: /tmp
+  PY_COLORS: 1
 
 
 ##################################################
-# LINT
+# LINT # we remove it as managed by pre-commit instead
 ##################################################
-yamllint:
-  stage: lint
-  image: sdesbure/yamllint
-  before_script:
-    - yamllint --version
-  script:
-    - yamllint .
-
-ansible-lint:
-  stage: lint
-  image: lotusnoir/ansible_play
-  script:
-    - ansible-lint .
+#yamllint:
+#  stage: lint
+#  image: sdesbure/yamllint
+#  before_script:
+#    - yamllint --version
+#  script:
+#    - yamllint .
+#
+#ansible-lint:
+#  stage: lint
+#  image: lotusnoir/ansible_play
+#  script:
+#    - ansible-lint .
 
 
 ##################################################
 # TEST / SECU
 ##################################################
-include:
-  - template: Security/Secret-Detection.gitlab-ci.yml
+#include:
+#  - template: Security/Secret-Detection.gitlab-ci.yml
 
 
 ######################################################
@@ -40,9 +40,6 @@ include:
 changelog:
   stage: changes
   image: node:19
-  needs:
-    - yamllint
-    - ansible-lint
   artifacts:
     paths:
       - CHANGELOG.md
