@@ -9,31 +9,6 @@ variables:
   PY_COLORS: 1
 
 
-##################################################
-# LINT # we remove it as managed by pre-commit instead
-##################################################
-#yamllint:
-#  stage: lint
-#  image: sdesbure/yamllint
-#  before_script:
-#    - yamllint --version
-#  script:
-#    - yamllint .
-#
-#ansible-lint:
-#  stage: lint
-#  image: lotusnoir/ansible_play
-#  script:
-#    - ansible-lint .
-
-
-##################################################
-# TEST / SECU
-##################################################
-#include:
-#  - template: Security/Secret-Detection.gitlab-ci.yml
-
-
 ######################################################
 # GENERATE CHANGELOG FILE
 ######################################################
