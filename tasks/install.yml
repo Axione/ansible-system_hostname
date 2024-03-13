@@ -17,7 +17,7 @@
   ansible.builtin.hostname:
     name: "{{ hostname_value }}"
     use: systemd
-  register: name
+  register: _newname
 
 - name: Update hosts file
   ansible.builtin.template:
@@ -31,12 +31,12 @@
 - name: Populate service facts
   ansible.builtin.service_facts:
 
-- name: restart services
+- name: Restart services
   ansible.builtin.service:
     name: "{{ item }}"
     state: restarted
   with_items: "{{ hostname_restart_services }}"
   when:
     - item in services
-    - name.changed
+    - _newname.changed
     - hostname_restart_services|length >0
