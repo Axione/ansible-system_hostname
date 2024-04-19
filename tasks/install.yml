@@ -7,11 +7,13 @@
   retries: 12
   delay: 10
   until: pkg_result is success
+  when: hostname_ensure_dbus | bool
 
 - name: Ensure dbus.socket is running
   ansible.builtin.service:
     name: dbus.socket
     state: started
+  when: hostname_ensure_dbus | bool
 
 - name: Set hostname
   ansible.builtin.hostname:

@@ -1,4 +1,7 @@
 ---
+#In some cases package dbus is missing and not started
+hostname_ensure_dbus: false
+
 #use to set name on system
 hostname_value: "{{ inventory_hostname }}"
 
