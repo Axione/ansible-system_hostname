@@ -15,12 +15,6 @@
     state: started
   when: hostname_ensure_dbus | bool
 
-- name: Set hostname
-  ansible.builtin.hostname:
-    name: "{{ hostname_value }}"
-    use: systemd
-  register: _newname
-
 - name: Update hosts file
   ansible.builtin.template:
     src: hosts.j2
@@ -29,6 +23,12 @@
     group: root
     mode: '0644'
     backup: 'yes'
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ hostname_value }}"
+    use: systemd
+  register: _newname
 
 - name: Populate service facts
   ansible.builtin.service_facts:
